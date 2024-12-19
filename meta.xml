@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 1999-2024. WebPros International GmbH. All rights reserved. -->
+<module>
+    <id>example</id>
+    <name>Extension example</name>
+    <description>Home page dashboard extension example</description>
+    <version>1.0</version>
+    <release>1</release>
+    <vendor>Plesk</vendor>
+    <url>http://plesk.com</url>
+    <plesk_min_version>18.0.67</plesk_min_version>
+</module>

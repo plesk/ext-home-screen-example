@@ -1,0 +1,14 @@
+[2024-12-15 10:00:01] INFO  Starting application...
+[2024-12-15 10:00:05] DEBUG Initializing components...
+[2024-12-15 10:00:10] INFO  User login attempt: username=admin
+[2024-12-15 10:00:12] ERROR Invalid password attempt for username=admin
+[2024-12-15 10:00:20] INFO  User login success: username=admin
+[2024-12-15 10:01:30] WARN  Slow response from database server
+[2024-12-15 10:01:40] INFO  Database query executed: SELECT * FROM users WHERE status='active'
+[2024-12-15 10:02:00] DEBUG Processing data from API response
+[2024-12-15 10:02:10] INFO  Data processing complete
+[2024-12-15 10:05:00] ERROR Unhandled exception: Database connection failed
+[2024-12-15 10:06:00] INFO  Reconnecting to database...
+[2024-12-15 10:06:15] INFO  Database connection established
+[2024-12-15 10:10:00] INFO  Application shutdown initiated
+[2024-12-15 10:10:05] INFO  Application shutdown complete

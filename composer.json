@@ -1,0 +1,13 @@
+{
+  "name": "plesk/ext-example",
+  "version": "1.0.0",
+  "config": {
+    "vendor-dir": "plib/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "PleskExt\\Example\\": "example/library/"
+    }
+  },
+  "require": {}
+}
