@@ -1,13 +1,17 @@
 {
-  "name": "plesk/ext-example",
+  "name": "plesk/ext-home-screen-example",
   "version": "1.0.0",
   "config": {
     "vendor-dir": "plib/vendor"
   },
   "autoload": {
     "psr-4": {
-      "PleskExt\\Example\\": "example/library/"
+      "PleskExt\\Example\\": [
+        "modules/home-screen-example/library",
+        "src/plib/library"
+      ]
     }
   },
-  "require": {}
+  "require": {},
+  "require-dev": { "plesk/pm-api-stubs": "^18.0" }
 }
