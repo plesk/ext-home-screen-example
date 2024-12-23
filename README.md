@@ -1,12 +1,12 @@
 # Custom Dashboard Extension Example
 
-This README explains the customization options available when adding a custom block to the administrator's Home page. The block can be adjusted through various methods provided by the abstract `Block` class.
+This README explains how you can customize your extension's block on the administrator's Home page via a number of methods provided by the abstract `Block` class.
 
 ## Customization Options
 
 ### 1. Block ID `getId()`
 
-Defines the unique identifier for the block.
+Defines the block's unique identifier.
 
 **Example:**
 
@@ -18,10 +18,9 @@ public function getId(): string {
 
 ### 2. Block Title `getTitle()`
 
-Defines the title of the block. By default, the block title is set to the extension title. This title will be displayed in the Home page customization (in Customize drawer).
-Note that block title is always loaded synchronously and should be lightweight.
+Defines the block's name (by default, it is the same as the extension's name). The name will be shown when customizing the Home page (inside the Customize drawer). It's always loaded synchronously and should be lightweight.
 
-**Important:** The title is unescaped HTML, so ensure it is properly sanitized if needed.
+**Important:** The name is unescaped HTML. Make sure it's properly sanitized.
 
 **Example:**
 
@@ -34,9 +33,9 @@ public function getTitle(): string {
 
 ### 3. Block Content `getContent()`
 
-Defines the content of the block. This is the primary content that will be displayed within the block on the Home page.
+Defines the block's content that will be shown inside the block on the Home page.
 
-**Important:** The content is unescaped HTML, so ensure proper escaping and sanitization if dynamic data is used to prevent security issues.
+**Important:** The content is unescaped HTML. Make sure that any dynamic data is properly escaped and sanitized to prevent security issues.
 
 **Example:**
 
@@ -49,28 +48,33 @@ public function getContent(): string {
 
 ### 4. Block Footer `getFooter()`
 
-Defines the footer content for the block. By default, the footer is empty.
+Defines the content of the block's footer (by default, it's empty).
 
-**Important:** Like the content, the footer is also unescaped HTML.
+**Important:** The footer is unescaped HTML. Make sure that any dynamic data is properly escaped and sanitized to prevent security issues.
 
 **Example:**
 
 ```php
 public function getFooter(): string {
-    return "<div class='footer-links'><a href='/docs'>Documentation</a> | <a href='/support'>Support</a></div>";
+    return "
+        <div class='footer-links'>
+            <a href='/docs'>Documentation</a> | 
+            <a href='/support'>Support</a>
+        </div>
+    ";
 }
 ```
 ![img_2.png](images/img_6.png)
 
 ### 5. Block Column `getColumn()`
 
-Defines the column in which the block will be placed on the dashboard. The block can be positioned in one of the following columns:
+Defines which of the three columns on the Home page the block will be placed in.
 
 - **0**: First column
 - **1**: Second column
-- **2**: Third column (last column by default)
+- **2**: Third column (the last column by default)
 
-By default, the block will be placed in the last column (column `2`), 
+By default, the block will be placed in the last column (column `2`).
 
 **Example:**
 
@@ -82,11 +86,9 @@ public function getColumn(): int {
 
 ### 6. Block Order `getOrder()`
 
-Defines the order in which the block will appear within the column it is placed in. The blocks will be arranged in the order specified by their respective `getOrder()` values.
+Defines the order in which the block will appear within the column it's placed in. The blocks are ordered depending on their respective `getOrder()` values. By default, the block will be placed last within its column.
 
-- **Default behavior**: The block will be placed last within its column.
-
-You can customize the order by returning a specific integer value. Lower numbers represent earlier positions, and higher numbers represent later positions.
+You can customize this order by returning a specific integer value. The lower the value, the higher the block will be placed within its column, and vice versa.
 
 **Example:**
 
@@ -98,20 +100,12 @@ public function getOrder(): int {
 
 ### 7. Asynchronous Loading `isAsyncLoaded()`
 
-Defines whether the content of the block should be loaded asynchronously. Asynchronous loading helps improve page load times by allowing the block content to be fetched in the background while the rest of the page is rendered.
+Defines whether the content of the block may be loaded asynchronously (true by default). Asynchronous loading improves the Home page load time by allowing the block's content to be fetched in the background while the rest of the page is being rendered.
 
-- **Synchronous Blocks**  
-  Content for synchronous blocks is loaded during page preload (before rendering).
-    - This approach should be used for blocks that are guaranteed to load very quickly.
-    - It avoids unnecessary blinking caused by switching from a skeleton to the block's content.
+- **Synchronous Blocks** content is loaded during page preload (before rendering) to avoid the blinking caused by switching from a skeleton to the block's content. This blocks the page rendering, and should only be used for blocks that load very quickly.
 
-
-- **Asynchronous Blocks**  
-  Content for asynchronous blocks is loaded after the page has been rendered.
-    - This method does not block page rendering.
-    - While the content is being loaded, a skeleton is displayed as a placeholder.
-    - **Note:** If the content loads very quickly, the transition from the skeleton to the block's content may cause unnecessary blinking. In such cases, a synchronous block may be preferable.
-
+- **Asynchronous Blocks** content is loaded after the page has been rendered. This doesn't block the page rendering. A skeleton is shown as a placeholder while the content is being loaded.
+If the content loads very quickly, the transition from the skeleton to the block's content may cause blinking. In such cases, a synchronous block may be preferable.
 
 - **Default behavior**: The block content is loaded asynchronously (true by default).
 
@@ -125,9 +119,7 @@ public function isAsyncLoaded(): bool {
 
 ### 8. Skeleton Size `getSkeletonSize()`
 
-Defines the size of the skeleton (content placeholder) to be shown while the block’s content is being loaded. This option is only applicable when the block is set to load asynchronously.
-
-- **Default behavior**: A skeleton size of 2 is used as the placeholder.
+Defines the size of the skeleton (content placeholder) to be shown while the block’s content is being loaded. This option is only applicable when the block is set to load asynchronously. By default, the size of the skeleton is set to 2.
 
 **Example:**
 
@@ -140,8 +132,7 @@ public function getSkeletonSize(): int {
 
 ### 9. Block Enabled `isEnabled()`
 
-Defines whether the block is enabled by default when the page is loaded. By default, the block is enabled (`true`).
-Disabled blocks will not appear on the dashboard until enabled.
+Defines whether the block is to be shown on the Home page (true by default). Disabled blocks do not appear on the Home page.
 
 - **Default behavior**: The block is enabled by default.
 
@@ -156,15 +147,11 @@ public function isEnabled(): bool {
 
 ### 10. Block Section `getSection()`
 
-Defines the section the block belongs to, which determines where it will appear when customizing the Home page (in Customize drawer).
+Defines the section the block belongs to, which determines where it will appear when customizing the Home page (inside the Customize drawer). You can place the block in one of the following sections:
 
-- **Default value**: `SECTION_PLESK`
-
-The section defines the logical grouping of blocks on the Home page, and you can place the block in one of the following sections:
-
-- `SECTION_PLESK` – Default section for blocks.
-- `SECTION_SERVER` – For server-related blocks.
-- `SECTION_SECURITY` – For security-related blocks.
+- `SECTION_PLESK` – Default section for blocks (all blocks are placed in this section unless a different section is explicitly specified)
+- `SECTION_SERVER` – For server-related blocks
+- `SECTION_SECURITY` – For security-related blocks
 
 **Example:**
 
@@ -177,11 +164,9 @@ public function getSection(): string {
 
 ### 11. Block Section Order `getSectionOrder()`
 
-Defines the order of the block within its section when customizing the Home page (in Customize drawer). The order determines where the block will appear relative to other blocks in the same section.
+Defines the position of the block relative to other blocks in the same section when customizing the Home page (inside the Customize drawer). By default, the block is placed last.
 
-- **Default value**: Last block in the section
-
-This option allows you to control the sequence in which blocks appear within their respective section. Blocks with a lower order value will appear before those with a higher value.
+You can control the sequence in which blocks appear within their respective section by returning a specific integer value. Blocks with a lower order value will be placed before those with a higher value.
 
 **Example:**
 
@@ -193,9 +178,7 @@ public function getSectionOrder(): int {
 
 ### 12. Block Name `getName()`
 
-Defines the name of the block to be displayed when customizing the Home page (in Customize drawer). 
-
-- **Default value**: Extension title
+Defines the block's name shown when customizing the Home page (inside the Customize drawer). By default, it is the same as the extension's name.
 
 **Example:**
 
@@ -208,7 +191,7 @@ public function getName(): string {
 
 ### 13. Block Icon `getIcon()`
 
-Specifies the icon to be displayed alongside the block name when customizing the Home page.
+Specifies the icon to be shown alongside the block name when customizing the Home page.
 
 **Example:**
 
