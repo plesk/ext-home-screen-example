@@ -1,0 +1,6 @@
+# dependencies
+/src/plib/vendor
+
+# misc
+.idea
+*.zip
