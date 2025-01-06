@@ -1,7 +1,7 @@
 <?php
 // Copyright 1999-2024. WebPros International GmbH. All rights reserved.
 
-namespace PleskExt\Example;
+namespace PleskExt\Example\Hook;
 
 use Plesk\SDK\Hook\Home\Block;
 

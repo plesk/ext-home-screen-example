@@ -2,7 +2,7 @@
   "name": "plesk/ext-home-screen-example",
   "version": "1.0.0",
   "config": {
-    "vendor-dir": "plib/vendor"
+    "vendor-dir": "src/plib/vendor"
   },
   "autoload": {
     "psr-4": {
