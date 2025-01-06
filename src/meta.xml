@@ -2,11 +2,13 @@
 <!-- Copyright 1999-2024. WebPros International GmbH. All rights reserved. -->
 <module>
     <id>home-screen-example</id>
-    <name>Extension example</name>
+    <name>Custom Dashboard Extension</name>
     <description>Home page dashboard extension example</description>
+    <category>example</category>
     <version>1.0</version>
     <release>1</release>
     <vendor>Plesk</vendor>
-    <url>http://plesk.com</url>
+    <url>https://github.com/plesk/ext-home-screen-example</url>
+    <support_url>https://github.com/plesk/ext-home-screen-example/issues</support_url>
     <plesk_min_version>18.0.60</plesk_min_version>
 </module>
