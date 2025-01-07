@@ -5,5 +5,7 @@ class IndexController extends pm_Controller_Action
 {
     public function indexAction()
     {
+        $this->view->pageTitle = 'Custom Dashboard Extension';
+        $this->view->description = 'Home page dashboard extension example';
     }
 }
