@@ -1,5 +1,5 @@
 <?php
-// Copyright 1999-2024. WebPros International GmbH. All rights reserved.
+// Copyright 1999-2025. WebPros International GmbH. All rights reserved.
 
 namespace PleskExt\Example\Hook;
 
@@ -77,7 +77,7 @@ class HomeDisabledBlock extends Block
      */
     public function getSection(): string
     {
-        return static::SECTION_SERVER;
+        return static::SECTION_PLESK;
     }
 
     /**

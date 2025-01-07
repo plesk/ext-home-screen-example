@@ -1,11 +1,11 @@
 <?php
-// Copyright 1999-2024. WebPros International GmbH. All rights reserved.
+// Copyright 1999-2025. WebPros International GmbH. All rights reserved.
 
 namespace PleskExt\Example\Hook;
 
 use Plesk\SDK\Hook\Home\Block;
 
-class HomeStaticContentBlock extends Block
+class HomeAsyncBlock extends Block
 {
     /**
      * Define block unique ID
@@ -16,7 +16,7 @@ class HomeStaticContentBlock extends Block
      */
     public function getId(): string
     {
-        return 'static-content-block';
+        return 'async-block';
     }
 
     /**
@@ -41,28 +41,24 @@ class HomeStaticContentBlock extends Block
      */
     public function getContent(): string
     {
-        $log = <<<CONTENT
-            [2024-12-15 10:00:01] INFO  Starting application...
-            [2024-12-15 10:00:05] DEBUG Initializing components...
-            [2024-12-15 10:00:10] INFO  User login attempt: username=admin
-            [2024-12-15 10:00:12] ERROR Invalid password attempt for username=admin
-            [2024-12-15 10:00:20] INFO  User login success: username=admin
-            [2024-12-15 10:01:30] WARN  Slow response from database server
-            [2024-12-15 10:01:40] INFO  Database query executed: SELECT * FROM users WHERE status='active'
-            [2024-12-15 10:02:00] DEBUG Processing data from API response
-            [2024-12-15 10:02:10] INFO  Data processing complete
-            [2024-12-15 10:05:00] ERROR Unhandled exception: Database connection failed
-            [2024-12-15 10:06:00] INFO  Reconnecting to database...
-            [2024-12-15 10:06:15] INFO  Database connection established
-            [2024-12-15 10:10:00] INFO  Application shutdown initiated
-            [2024-12-15 10:10:05] INFO  Application shutdown complete
-        CONTENT;
+        return "
+        <div>
+            Current time:
+            <mark id='time' style='background-color: green; color: yellow; padding: 5px;'></mark>
+        </div>
+        <script>
+            function updateTime() {
+                const timeElement = document.getElementById('time');
+                const currentTime = new Date().toLocaleTimeString();
+                timeElement.textContent = currentTime;
+            }
 
-        $formattedContent = htmlspecialchars(nl2br($log));
+	    updateTime();
 
-        return "<div>Log:<br />{$formattedContent}</div>";
+            setInterval(updateTime, 1000);
+        </script>
+    ";
     }
-
 
     /**
      * Define column the block should be placed to
@@ -98,7 +94,7 @@ class HomeStaticContentBlock extends Block
      */
     public function getSection(): string
     {
-        return static::SECTION_SERVER;
+        return static::SECTION_PLESK;
     }
 
     /**
@@ -110,7 +106,19 @@ class HomeStaticContentBlock extends Block
      */
     public function getIcon(): string
     {
-        return 'database';
+        return 'boost';
+    }
+
+    /**
+     * Define block footer
+     *
+     * Attention: unescaped HTML. Empty by default.
+     *
+     * @return string
+     */
+    public function getFooter(): string
+    {
+        return 'Footer example';
     }
 
     /**
@@ -134,7 +142,7 @@ class HomeStaticContentBlock extends Block
      */
     public function getTitle(): string
     {
-        return '<mark style="background-color: green; color: white; padding: 5px;">Static content block example</mark>';
+        return '<mark style="background-color: orange; padding: 5px; margin-bottom: 5px;">Async block example</mark>';
     }
 
     /**
@@ -147,6 +155,6 @@ class HomeStaticContentBlock extends Block
      */
     public function getName(): string
     {
-        return 'Static content block';
+        return 'Async block';
     }
 }
