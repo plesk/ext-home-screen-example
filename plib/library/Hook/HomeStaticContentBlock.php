@@ -5,7 +5,7 @@ namespace PleskExt\Example\Hook;
 
 use Plesk\SDK\Hook\Home\Block;
 
-class HomeSyncBlock extends Block
+class HomeStaticContentBlock extends Block
 {
     /**
      * Define block unique ID
@@ -16,7 +16,7 @@ class HomeSyncBlock extends Block
      */
     public function getId(): string
     {
-        return 'sync-block';
+        return 'static-content-block';
     }
 
     /**
@@ -41,8 +41,28 @@ class HomeSyncBlock extends Block
      */
     public function getContent(): string
     {
-        return "<div>Current time: <mark style='background-color: green; color: yellow; padding: 5px;'>" . date('H:i:s') . "</mark></div>";
+        $log = <<<CONTENT
+            [2024-12-15 10:00:01] INFO  Starting application...
+            [2024-12-15 10:00:05] DEBUG Initializing components...
+            [2024-12-15 10:00:10] INFO  User login attempt: username=admin
+            [2024-12-15 10:00:12] ERROR Invalid password attempt for username=admin
+            [2024-12-15 10:00:20] INFO  User login success: username=admin
+            [2024-12-15 10:01:30] WARN  Slow response from database server
+            [2024-12-15 10:01:40] INFO  Database query executed: SELECT * FROM users WHERE status='active'
+            [2024-12-15 10:02:00] DEBUG Processing data from API response
+            [2024-12-15 10:02:10] INFO  Data processing complete
+            [2024-12-15 10:05:00] ERROR Unhandled exception: Database connection failed
+            [2024-12-15 10:06:00] INFO  Reconnecting to database...
+            [2024-12-15 10:06:15] INFO  Database connection established
+            [2024-12-15 10:10:00] INFO  Application shutdown initiated
+            [2024-12-15 10:10:05] INFO  Application shutdown complete
+        CONTENT;
+
+        $formattedContent = htmlspecialchars(nl2br($log));
+
+        return "<div>Log:<br />{$formattedContent}</div>";
     }
+
 
     /**
      * Define column the block should be placed to
@@ -78,7 +98,7 @@ class HomeSyncBlock extends Block
      */
     public function getSection(): string
     {
-        return static::SECTION_SERVER;
+        return static::SECTION_PLESK;
     }
 
     /**
@@ -90,19 +110,7 @@ class HomeSyncBlock extends Block
      */
     public function getIcon(): string
     {
-        return 'backup2';
-    }
-
-    /**
-     * Define block footer
-     *
-     * Attention: unescaped HTML. Empty by default.
-     *
-     * @return string
-     */
-    public function getFooter(): string
-    {
-        return 'Footer example';
+        return 'database';
     }
 
     /**
@@ -114,7 +122,7 @@ class HomeSyncBlock extends Block
      */
     public function isAsyncLoaded(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -126,7 +134,7 @@ class HomeSyncBlock extends Block
      */
     public function getTitle(): string
     {
-        return '<mark style="padding: 5px;">Sync block example</mark>';
+        return '<mark style="background-color: green; color: white; padding: 5px;">Static content block example</mark>';
     }
 
     /**
@@ -139,6 +147,6 @@ class HomeSyncBlock extends Block
      */
     public function getName(): string
     {
-        return 'Sync block';
+        return 'Static content block';
     }
 }

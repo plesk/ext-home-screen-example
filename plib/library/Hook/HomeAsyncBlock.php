@@ -94,7 +94,7 @@ class HomeAsyncBlock extends Block
      */
     public function getSection(): string
     {
-        return static::SECTION_SERVER;
+        return static::SECTION_PLESK;
     }
 
     /**

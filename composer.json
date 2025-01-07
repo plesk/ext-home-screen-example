@@ -2,13 +2,13 @@
   "name": "plesk/ext-home-screen-example",
   "version": "1.0.0",
   "config": {
-    "vendor-dir": "src/plib/vendor"
+    "vendor-dir": "plib/vendor"
   },
   "autoload": {
     "psr-4": {
       "PleskExt\\Example\\": [
-        "modules/home-screen-example/library",
-        "src/plib/library"
+        "home-screen-example/library",
+        "plib/library"
       ]
     }
   },

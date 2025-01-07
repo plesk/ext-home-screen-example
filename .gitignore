@@ -1,5 +1,5 @@
 # dependencies
-/src/plib/vendor
+/plib/vendor
 
 # misc
 .idea
