@@ -2,6 +2,19 @@
 
 This README explains how you can customize your extension's block on the administrator's Home page via a number of methods provided by the abstract `Block` class.
 
+
+## Setup
+```sh
+git clone https://github.com/plesk/ext-home-screen-example
+cd ext-home-screen-example/
+composer install
+```
+
+## Packaging & Installation
+```sh
+zip -r ext-home-screen-example.zip ext-home-screen-example/ --exclude "ext-home-screen-example/.git/*"
+plesk bin extension -i ext-home-screen-example.zip
+```
 ## Customization Options
 
 ### 1. Block ID `getId()`
