@@ -2,8 +2,8 @@
 
 This README explains how you can customize your extension's block on the administrator's Home page via a number of methods provided by the abstract `Block` class.
 
-
 ## Setup
+
 ```sh
 git clone https://github.com/plesk/ext-home-screen-example
 cd ext-home-screen-example/
@@ -11,10 +11,13 @@ composer install
 ```
 
 ## Packaging & Installation
+
 ```sh
+cd..
 zip -r ext-home-screen-example.zip ext-home-screen-example/ --exclude "ext-home-screen-example/.git/*"
 plesk bin extension -i ext-home-screen-example.zip
 ```
+
 ## Customization Options
 
 ### 1. Block ID `getId()`
@@ -42,6 +45,7 @@ public function getTitle(): string {
     return "Custom Dashboard Block";
 }
 ```
+
 ![img.png](images/img_4.png)
 
 ### 3. Block Content `getContent()`
@@ -57,6 +61,7 @@ public function getContent(): string {
     return "<div>Custom dashboard block content example</div>";
 }
 ```
+
 ![img_1.png](images/img_5.png)
 
 ### 4. Block Footer `getFooter()`
@@ -77,6 +82,7 @@ public function getFooter(): string {
     ";
 }
 ```
+
 ![img_2.png](images/img_6.png)
 
 ### 5. Block Column `getColumn()`
@@ -141,6 +147,7 @@ public function getSkeletonSize(): int {
     return 10;
 }
 ```
+
 ![img_3.png](images/img_7.png)
 
 ### 9. Block Enabled `isEnabled()`
@@ -156,6 +163,7 @@ public function isEnabled(): bool {
     return false;
 }
 ```
+
 ![img.png](images/img.png)
 
 ### 10. Block Section `getSection()`
@@ -173,6 +181,7 @@ public function getSection(): string {
     return self::SECTION_SERVER;
 }
 ```
+
 ![img_4.png](images/img_8.png)
 
 ### 11. Block Section Order `getSectionOrder()`
@@ -200,6 +209,7 @@ public function getName(): string {
     return 'Custom Dashboard Block'; 
 }
 ```
+
 ![img_1.png](images/img_3.png)
 
 ### 13. Block Icon `getIcon()`
@@ -213,6 +223,7 @@ public function getIcon(): string {
     return 'mail';
 }
 ```
+
 ![img.png](images/img_2.png)
 
 ### Declaring Multiple Dashboard Blocks
@@ -245,3 +256,4 @@ return new class () extends Home {
     }
 };
 ```
+
