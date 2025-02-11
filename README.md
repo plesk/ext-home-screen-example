@@ -13,7 +13,7 @@ composer install
 ## Packaging & Installation
 
 ```sh
-cd..
+cd ..
 zip -r ext-home-screen-example.zip ext-home-screen-example/ --exclude "ext-home-screen-example/.git/*"
 plesk bin extension -i ext-home-screen-example.zip
 ```
@@ -256,4 +256,3 @@ return new class () extends Home {
     }
 };
 ```
-
